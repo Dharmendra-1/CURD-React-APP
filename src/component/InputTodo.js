@@ -45,6 +45,10 @@ const InputTodo = () => {
         return [...item, newTodo];
       });
     }
+
+    setName('');
+    setNumber('');
+    setIfsc('');
   };
 
   const deleteItem = (id) => {
@@ -68,7 +72,7 @@ const InputTodo = () => {
   return (
     <>
       <div className='container'>
-        <h1 className='text-center mt-5'>Bank Account Details</h1>
+        <h1 className='text-center mt-5'>BANK ACCOUNT DETAILS</h1>
         <form className='formDetils' onSubmit={handleSubmit}>
           <div>
             <label htmlFor='name'>Name :</label>
