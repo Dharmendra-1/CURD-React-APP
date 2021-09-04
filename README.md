@@ -1,5 +1,5 @@
 # Project Link
-   [CURD APP](https://ecstatic-bose-5b2eb7.netlify.app/)
+   [CURD APP](https://dharmendracurdapp.netlify.app/)
    
 # Getting Started with Create React App
 
