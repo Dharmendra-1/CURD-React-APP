@@ -1,16 +1,7 @@
 import React from 'react';
 import TableData from './TableData';
 
-const ListContent = ({
-  listData,
-  setListData,
-  setName,
-  setLocation,
-  setNumber,
-  setAadhar,
-  setToggle,
-  setEditId,
-}) => {
+const ListContent = () => {
   return (
     <div className='container'>
       <div className='tableForm'>
@@ -19,30 +10,13 @@ const ListContent = ({
             <tr>
               <th>Name</th>
               <th>Location</th>
-              <th>Account Number</th>
-              <th>Aadhar Number</th>
+              <th>Phone Number</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {listData.map((obj) => {
-              return (
-                <tr key={obj.id}>
-                  <TableData
-                    obj={obj}
-                    listData={listData}
-                    setListData={setListData}
-                    setName={setName}
-                    setLocation={setLocation}
-                    setNumber={setNumber}
-                    setAadhar={setAadhar}
-                    setToggle={setToggle}
-                    setEditId={setEditId}
-                  />
-                </tr>
-              );
-            })}
+            <TableData />
           </tbody>
         </table>
       </div>

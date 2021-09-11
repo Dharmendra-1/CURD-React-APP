@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+  SetNameContext,
+  SetLocationContext,
+  setNumberContetxt,
+  ListOfData,
+  SetListData,
+  SetToggleContext,
+  SetEditData,
+} from './MainState';
 
-const TableData = ({
-  obj,
-  listData,
-  setListData,
-  setName,
-  setLocation,
-  setNumber,
-  setAadhar,
-  setToggle,
-  setEditId,
-}) => {
+const TableData = () => {
+  const setName = useContext(SetNameContext);
+  const setLocation = useContext(SetLocationContext);
+  const setNumber = useContext(setNumberContetxt);
+  const setToggle = useContext(SetToggleContext);
+  const setListData = useContext(SetListData);
+  const listData = useContext(ListOfData);
+  const setEditId = useContext(SetEditData);
+
   const deleteItem = (id) => {
     let deletedData = listData.filter((obj) => obj.id !== id);
     setListData(deletedData);
@@ -22,26 +29,37 @@ const TableData = ({
     setName(editData.name);
     setLocation(editData.location);
     setNumber(editData.number);
-    setAadhar(editData.aadhar);
     setEditId(id);
   };
 
   return (
     <>
-      <td>{obj.name}</td>
-      <td>{obj.location}</td>
-      <td>{obj.number}</td>
-      <td>{obj.aadhar}</td>
-      <td>
-        <button className='btn btn-primary' onClick={() => editItem(obj.id)}>
-          Edit
-        </button>
-      </td>
-      <td>
-        <button className='btn btn-danger' onClick={() => deleteItem(obj.id)}>
-          Delete
-        </button>
-      </td>
+      {listData.map((obj) => {
+        const { name, location, number } = obj;
+        return (
+          <tr>
+            <td>{name}</td>
+            <td>{location}</td>
+            <td>{number}</td>
+            <td>
+              <button
+                className='btn btn-primary'
+                onClick={() => editItem(obj.id)}
+              >
+                Edit
+              </button>
+            </td>
+            <td>
+              <button
+                className='btn btn-danger'
+                onClick={() => deleteItem(obj.id)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        );
+      })}
     </>
   );
 };

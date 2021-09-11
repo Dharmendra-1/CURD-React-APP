@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+  NameOfContext,
+  SetNameContext,
+  LocationOfContext,
+  SetLocationContext,
+  NumberOfContext,
+  setNumberContetxt,
+  SubmitContext,
+  ToggleContext,
+} from './MainState';
 
-const InputForm = ({
-  toggle,
-  name,
-  location,
-  number,
-  aadhar,
-  setName,
-  setLocation,
-  setNumber,
-  setAadhar,
-  submitForm,
-}) => {
+const InputForm = () => {
+  const name = useContext(NameOfContext);
+  const location = useContext(LocationOfContext);
+  const number = useContext(NumberOfContext);
+  const submitForm = useContext(SubmitContext);
+  const setName = useContext(SetNameContext);
+  const setLocation = useContext(SetLocationContext);
+  const setNumber = useContext(setNumberContetxt);
+  const toggle = useContext(ToggleContext);
+
   return (
     <div className='container'>
       <form action='form-control' className='form' onSubmit={submitForm}>
@@ -31,17 +39,10 @@ const InputForm = ({
         />
         <input
           type='number'
-          name='accNumber'
-          placeholder='Enter Your Account Numbers..'
+          name='PhoneNumber'
+          placeholder='Enter Your Phone Numbers..'
           value={number}
           onChange={(e) => setNumber(e.target.value)}
-        />
-        <input
-          type='number'
-          name='aadharNumber'
-          placeholder='Enter Your Aadhar Numbers..'
-          value={aadhar}
-          onChange={(e) => setAadhar(e.target.value)}
         />
         {toggle ? (
           <button class='btn btn-success'>Submit</button>
