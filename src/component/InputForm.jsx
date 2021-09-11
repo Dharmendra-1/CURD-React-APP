@@ -1,25 +1,18 @@
 import React, { useContext } from 'react';
 
-import {
-  NameOfContext,
-  SetNameContext,
-  LocationOfContext,
-  SetLocationContext,
-  NumberOfContext,
-  setNumberContetxt,
-  SubmitContext,
-  ToggleContext,
-} from './MainState';
+import { allOfContext } from './MainState';
 
 const InputForm = () => {
-  const name = useContext(NameOfContext);
-  const location = useContext(LocationOfContext);
-  const number = useContext(NumberOfContext);
-  const submitForm = useContext(SubmitContext);
-  const setName = useContext(SetNameContext);
-  const setLocation = useContext(SetLocationContext);
-  const setNumber = useContext(setNumberContetxt);
-  const toggle = useContext(ToggleContext);
+  const {
+    name,
+    location,
+    number,
+    toggle,
+    setName,
+    setLocation,
+    setNumber,
+    submitForm,
+  } = useContext(allOfContext);
 
   return (
     <div className='container'>
