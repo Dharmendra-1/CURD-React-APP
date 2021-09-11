@@ -3,19 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ListContent from './listContent';
 import InputForm from './InputForm';
 
-const NameOfContext = createContext();
-const SetNameContext = createContext();
-const LocationOfContext = createContext();
-const SetLocationContext = createContext();
-const NumberOfContext = createContext();
-const setNumberContetxt = createContext();
-const ListOfData = createContext();
-const SetListData = createContext();
-const SubmitContext = createContext();
-const ToggleContext = createContext();
-const SetToggleContext = createContext();
-const EditDataContext = createContext();
-const SetEditData = createContext();
+const allOfContext = createContext();
 
 const InputFormMain = () => {
   const [name, setName] = useState('');
@@ -58,50 +46,28 @@ const InputFormMain = () => {
   };
 
   return (
-    <NameOfContext.Provider value={name}>
-      <SetNameContext.Provider value={setName}>
-        <LocationOfContext.Provider value={location}>
-          <SetLocationContext.Provider value={setLocation}>
-            <NumberOfContext.Provider value={number}>
-              <setNumberContetxt.Provider value={setNumber}>
-                <ListOfData.Provider value={listData}>
-                  <SetListData.Provider value={setListData}>
-                    <SubmitContext.Provider value={submitForm}>
-                      <ToggleContext.Provider value={toggle}>
-                        <SetToggleContext.Provider value={setToggle}>
-                          <EditDataContext.Provider value={editId}>
-                            <SetEditData.Provider value={setEditId}>
-                              <InputForm />
-                              <ListContent />
-                            </SetEditData.Provider>
-                          </EditDataContext.Provider>
-                        </SetToggleContext.Provider>
-                      </ToggleContext.Provider>
-                    </SubmitContext.Provider>
-                  </SetListData.Provider>
-                </ListOfData.Provider>
-              </setNumberContetxt.Provider>
-            </NumberOfContext.Provider>
-          </SetLocationContext.Provider>
-        </LocationOfContext.Provider>
-      </SetNameContext.Provider>
-    </NameOfContext.Provider>
+    <allOfContext.Provider
+      value={{
+        name,
+        location,
+        number,
+        listData,
+        toggle,
+        editId,
+        setName,
+        setLocation,
+        setNumber,
+        setEditId,
+        setListData,
+        setToggle,
+        submitForm,
+      }}
+    >
+      <InputForm />
+      <ListContent />
+    </allOfContext.Provider>
   );
 };
 
 export default InputFormMain;
-export {
-  NameOfContext,
-  SetNameContext,
-  LocationOfContext,
-  SetLocationContext,
-  NumberOfContext,
-  setNumberContetxt,
-  ListOfData,
-  SetListData,
-  SubmitContext,
-  ToggleContext,
-  SetToggleContext,
-  EditDataContext,
-  SetEditData,
-};
+export { allOfContext };
