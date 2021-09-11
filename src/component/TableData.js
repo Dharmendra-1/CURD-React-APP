@@ -1,23 +1,17 @@
 import React, { useContext } from 'react';
 
-import {
-  SetNameContext,
-  SetLocationContext,
-  setNumberContetxt,
-  ListOfData,
-  SetListData,
-  SetToggleContext,
-  SetEditData,
-} from './MainState';
+import { allOfContext } from './MainState';
 
 const TableData = () => {
-  const setName = useContext(SetNameContext);
-  const setLocation = useContext(SetLocationContext);
-  const setNumber = useContext(setNumberContetxt);
-  const setToggle = useContext(SetToggleContext);
-  const setListData = useContext(SetListData);
-  const listData = useContext(ListOfData);
-  const setEditId = useContext(SetEditData);
+  const {
+    setName,
+    setLocation,
+    setNumber,
+    setToggle,
+    setListData,
+    listData,
+    setEditId,
+  } = useContext(allOfContext);
 
   const deleteItem = (id) => {
     let deletedData = listData.filter((obj) => obj.id !== id);
