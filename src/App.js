@@ -1,12 +1,12 @@
 import './App.css';
 import Headings from './component/Headings';
-import InputFormMain from './component/MainState';
+import MainState from './component/MainState';
 
 function App() {
   return (
     <>
       <Headings />
-      <InputFormMain />
+      <MainState />
     </>
   );
 }
