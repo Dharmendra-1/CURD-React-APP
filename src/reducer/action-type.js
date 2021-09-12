@@ -1,0 +1,5 @@
+export const ActionType = {
+  SET_PERSONS: 'SET_PERSONS',
+  DELETE_PERSON: 'DELETE_PERSON',
+  UPDATE_PERSON: 'UPDATE_PERSON',
+};
