@@ -1,45 +1,40 @@
 import React, { useContext } from 'react';
-
-import { allOfContext } from './MainState';
+import { mainContext } from './MainState';
+import { formContext } from './InputForm';
+import { ActionType } from '../reducer/action-type';
 
 const TableData = () => {
-  const {
-    setName,
-    setLocation,
-    setNumber,
-    setToggle,
-    setListData,
-    listData,
-    setEditId,
-  } = useContext(allOfContext);
+  const { setName, setLocation, setNumber, setToggle, setEditID } =
+    useContext(mainContext);
 
-  const deleteItem = (id) => {
-    let deletedData = listData.filter((obj) => obj.id !== id);
-    setListData(deletedData);
-  };
+  const { person, dispatch } = useContext(formContext);
 
   const editItem = (id) => {
-    let editData = listData.find((obj) => obj.id === id);
+    let editData = person.find((obj) => obj.id === id);
+    const { name, location, number } = editData;
     setToggle(false);
-    setName(editData.name);
-    setLocation(editData.location);
-    setNumber(editData.number);
-    setEditId(id);
+    setName(name);
+    setLocation(location);
+    setNumber(number);
+    setEditID(id);
   };
 
   return (
     <>
-      {listData.map((obj) => {
-        const { name, location, number } = obj;
+      {person.map((obj) => {
+        const { id, name, location, number } = obj;
         return (
-          <tr>
+          <tr key={id}>
             <td>{name}</td>
             <td>{location}</td>
             <td>{number}</td>
             <td>
               <button
                 className='btn btn-primary'
-                onClick={() => editItem(obj.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  editItem(id);
+                }}
               >
                 Edit
               </button>
@@ -47,7 +42,13 @@ const TableData = () => {
             <td>
               <button
                 className='btn btn-danger'
-                onClick={() => deleteItem(obj.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch({
+                    type: ActionType.DELETE_PERSON,
+                    id,
+                  });
+                }}
               >
                 Delete
               </button>
