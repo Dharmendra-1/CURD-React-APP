@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer, createContext } from 'react';
+import { mainContext } from './MainState';
+import { ActionType } from '../reducer/action-type';
+import { PersonReducer } from '../reducer/reducer';
+import { v4 as uuidv4 } from 'uuid';
+import ListContent from './listContent';
 
-import { allOfContext } from './MainState';
+const formContext = createContext();
 
 const InputForm = () => {
   const {
+    editId,
     name,
     location,
     number,
@@ -11,8 +17,31 @@ const InputForm = () => {
     setName,
     setLocation,
     setNumber,
-    submitForm,
-  } = useContext(allOfContext);
+    setToggle,
+  } = useContext(mainContext);
+
+  const [{ person }, dispatch] = useReducer(PersonReducer, { person: [] });
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (!name || !location || !number) {
+      alert('Please Fill Proper Form..');
+    } else if (name && location && number && !toggle) {
+      const updateData = { editId, name, location, number };
+      dispatch({ type: ActionType.UPDATE_PERSON, updateData });
+      setToggle(true);
+      setName('');
+      setLocation('');
+      setNumber('');
+    } else {
+      let uuid = uuidv4();
+      let person = { id: uuid, name, location, number };
+      dispatch({ type: ActionType.SET_PERSONS, person });
+      setName('');
+      setLocation('');
+      setNumber('');
+    }
+  };
 
   return (
     <div className='container'>
@@ -39,13 +68,18 @@ const InputForm = () => {
           onChange={(e) => setNumber(e.target.value)}
         />
         {toggle ? (
-          <button class='btn btn-success'>Submit</button>
+          <button className='btn btn-success'>Submit</button>
         ) : (
-          <button class='btn btn-primary'>update</button>
+          <button className='btn btn-primary'>update</button>
         )}
       </form>
+
+      <formContext.Provider value={{ person, dispatch }}>
+        <ListContent />
+      </formContext.Provider>
     </div>
   );
 };
 
 export default InputForm;
+export { formContext };
