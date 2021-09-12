@@ -1,73 +1,34 @@
 import React, { createContext, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import ListContent from './listContent';
 import InputForm from './InputForm';
 
-const allOfContext = createContext();
+const mainContext = createContext();
 
 const InputFormMain = () => {
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
-  const [number, setNumber] = useState('');
-  const [listData, setListData] = useState([]);
+  const [number, setNumber] = useState(null);
   const [toggle, setToggle] = useState(true);
-  const [editId, setEditId] = useState(null);
-
-  const submitForm = (e) => {
-    e.preventDefault();
-    if (!name || !location || !number) {
-      alert('Please Fill Proper Form');
-    } else if (name && location && number && !toggle) {
-      setListData((listData) => {
-        let listDataOfEdit = listData.map((obj) => {
-          if (obj.id === editId) {
-            return { ...obj, name, location, number };
-          }
-          return obj;
-        });
-        return listDataOfEdit;
-      });
-
-      setToggle(true);
-      setEditId(null);
-      setName('');
-      setNumber('');
-      setLocation('');
-    } else {
-      const id = uuidv4();
-      let person = { id, name, location, number };
-      setListData((listData) => {
-        return [...listData, person];
-      });
-      setName('');
-      setLocation('');
-      setNumber('');
-    }
-  };
+  const [editId, setEditID] = useState(null);
 
   return (
-    <allOfContext.Provider
+    <mainContext.Provider
       value={{
+        editId,
         name,
         location,
         number,
-        listData,
         toggle,
-        editId,
         setName,
         setLocation,
         setNumber,
-        setEditId,
-        setListData,
         setToggle,
-        submitForm,
+        setEditID,
       }}
     >
       <InputForm />
-      <ListContent />
-    </allOfContext.Provider>
+    </mainContext.Provider>
   );
 };
 
 export default InputFormMain;
-export { allOfContext };
+export { mainContext };
